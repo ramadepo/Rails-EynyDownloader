@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 
 class EynyDownloader < ApplicationRecord
-  attr_reader :result, :target
+  attr_reader :result, :target, :filename, :download_path
   def load(url)
     pre_web = URI::escape(url.to_s)
     web = Nokogiri::HTML(open(pre_web))
@@ -13,9 +13,11 @@ class EynyDownloader < ApplicationRecord
       @target = nil
     end
   end
-  def download(url, filename)
-    path = "~/Downloads/" unless path
-    system_command = "wget -O #{path}#{filename}.mp4 #{url}"
+  def download(url, name)
+    @filename = name.to_s + ".mp4"
+    @download_path = File.join(Rails.root, 'public', 'my_temp', filename)
+    system_command = "wget -O #{download_path} #{url}"
     @result = system(system_command)
   end
+  
 end
