@@ -1,0 +1,11 @@
+<br />
+<%= form_for(@downloader, url: download_eyny_downloader_path) do |f| %>
+  <%= f.label :url, "網址" %>
+  <%= f.text_area :url, class: "form-control" %>
+
+  <%= f.label :filename, "主檔名" %>
+  <%= f.text_field :filename, class: "form-control" %>
+
+  <%= f.submit "下載", class: "btn btn-success"%>
+
+<% end %>
