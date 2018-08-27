@@ -15,7 +15,7 @@ class EynyDownloader < ApplicationRecord
   end
   def download(url, name)
     @filename = name.to_s + ".mp4"
-    @download_path = File.join(Rails.root, 'public', 'my_temp', filename)
+    @download_path = File.join(Rails.root, 'public', filename)
     system_command = "wget -O #{download_path} #{url}"
     @result = system(system_command)
   end
