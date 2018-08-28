@@ -3,6 +3,7 @@ lock "~> 3.11.0"
 
 set :application, "my_downloaders"
 set :repo_url, "git@github.com:Rama-aktsk/on_unicorn.git"
+set :branch, "unicon"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

@@ -7,6 +7,7 @@ gem 'nokogiri'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'mysql2'
+gem 'unicorn'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
@@ -58,6 +59,7 @@ group :development do
   gem 'capistrano-rbenv'
   gem 'capistrano-rails'
   #gem 'capistrano-passenger'
+  gem 'capistrano3-unicorn'
 end
 
 group :test do
