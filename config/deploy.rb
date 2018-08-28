@@ -31,7 +31,7 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
+set :unicorn_config_path, -> { File.join(current_path, "config", "unicorn.rb") }
 # Default value for local_user is ENV['USER']
 # set :local_user, -> { `git config user.name`.chomp }
 
@@ -40,3 +40,20 @@ set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
+after 'deploy:publishing', 'deploy:restart'
+namespace :deploy do
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
+    end
+  end
+
+  task :restart do
+    invoke 'unicorn:legacy_restart'
+  end
+
+end
